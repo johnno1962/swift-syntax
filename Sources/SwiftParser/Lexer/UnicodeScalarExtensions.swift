@@ -97,21 +97,11 @@ extension Unicode.Scalar {
     // ASCII operator chars.
     if self.value < 0x80 {
       switch UInt8(self.value) {
-      case UInt8(ascii: "/"),
-        UInt8(ascii: "="),
-        UInt8(ascii: "-"),
-        UInt8(ascii: "+"),
-        UInt8(ascii: "*"),
-        UInt8(ascii: "%"),
-        UInt8(ascii: "<"),
-        UInt8(ascii: ">"),
-        UInt8(ascii: "!"),
-        UInt8(ascii: "&"),
-        UInt8(ascii: "|"),
-        UInt8(ascii: "^"),
-        UInt8(ascii: "~"),
-        UInt8(ascii: "."),
-        UInt8(ascii: "?"):
+      case "/", "=", "-",
+        "+", "*", "%",
+        "<", ">", "!",
+        "&", "|", "^",
+        "~", ".", "?":
         return true
       default:
         return false
@@ -258,4 +248,59 @@ extension UInt8 {
     // RFC 3629: The octet values C0, C1, F5 to FF never appear.
     return self < 0x80 || (self >= 0xC2 && self < 0xF5)
   }
+}
+
+extension FixedWidthInteger {
+    /// Basic comparison operators
+    @_transparent
+    public static func == (i: Self, s: Unicode.Scalar) -> Bool {
+        return i == s.value
+    }
+    @_transparent
+    public static func != (i: Self, s: Unicode.Scalar) -> Bool {
+        return i != s.value
+    }
+    @_transparent
+    public static func <= (i: Self, s: Unicode.Scalar) -> Bool {
+        return i <= s.value
+    }
+    @_transparent
+    public static func >= (i: Self, s: Unicode.Scalar) -> Bool {
+        return i >= s.value
+    }
+    @_transparent
+    public static func < (i: Self, s: Unicode.Scalar) -> Bool {
+        return i < s.value
+    }
+    @_transparent
+    public static func > (i: Self, s: Unicode.Scalar) -> Bool {
+        return i > s.value
+    }
+    /// Used in switch statements
+    @_transparent
+    public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
+        return i == s.value
+    }
+    /// Maybe useful now and then
+    @_transparent
+    public static func - (i: Self, s: Unicode.Scalar) -> Self {
+        return i - Self(s.value)
+    }
+}
+
+extension Optional where Wrapped: FixedWidthInteger {
+    /// Basic equality operators
+    @_transparent
+    public static func == (i: Self, s: Unicode.Scalar) -> Bool {
+        return i == nil ? false : i! == s.value
+    }
+    @_transparent
+    public static func != (i: Self, s: Unicode.Scalar) -> Bool {
+        return i == nil ? true : i! != s.value
+    }
+    /// Used in switch statements
+    @_transparent
+    public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
+        return i == nil ? false : i! == s.value
+    }
 }
