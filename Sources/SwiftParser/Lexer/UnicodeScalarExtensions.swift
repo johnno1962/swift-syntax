@@ -250,6 +250,44 @@ extension UInt8 {
   }
 }
 
+/*
+ The following seem to be almost equivalent for the command:
+ time utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py \
+   ../build/Ninja-RelWithDebInfoAssert/swift-macosx-$(uname -m)/test-macosx-$(uname -m)
+ Baseline (unmodified parser)
+ ============================
+ Testing Time: 1122.44s
+ utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py
+ 6493.72s user 1264.90s system 489% cpu 26:26.28 total
+ Testing Time: 1066.77s
+ utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py
+ 6602.21s user 1250.95s system 520% cpu 25:09.33 total
+ */
+#if false
+/*
+ Testing Time: 1076.23s
+ utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py
+ 6614.94s user 1274.64s system 515% cpu 25:31.07 total
+ utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py
+ 6600.06s user 1246.00s system 522% cpu 25:01.41 total
+ */
+/// This extension is enough to compile the new Cusor.swift (faster)
+extension UInt8: ExpressibleByUnicodeScalarLiteral {
+    /// Make UInt8 expressible by "c" (probably not worth it)
+    @_transparent
+    public init(unicodeScalarLiteral value: UnicodeScalar) {
+        self.init(value.value)
+    }
+}
+#else
+/*
+ Testing Time: 1094.92s
+ utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py
+ 6942.21s user 1188.70s system 532% cpu 25:27.64 total
+ Testing Time: 1112.05s
+ utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py
+ 6860.19s user 1199.33s system 522% cpu 25:42.10 total
+ */
 extension FixedWidthInteger {
     /// Basic comparison operators
     @_transparent
@@ -304,3 +342,4 @@ extension Optional where Wrapped: FixedWidthInteger {
         return i == nil ? false : i! == s.value
     }
 }
+#endif
