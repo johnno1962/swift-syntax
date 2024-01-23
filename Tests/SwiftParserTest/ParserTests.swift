@@ -18,9 +18,17 @@ import XCTest
 import _SwiftSyntaxTestSupport
 
 public class ParserTests: ParserTestCase {
+  let repetitions = 10 // >1 to benchmark Lexer
+ 
   /// Run a single parse test.
   func runParseTest(fileURL: URL, checkDiagnostics: Bool) throws {
     let fileContents = try Data(contentsOf: fileURL)
+    if repetitions > 1 {
+      return fileContents.withUnsafeBytes({ buffer in
+        Parser.lex(source: buffer.bindMemory(to: UInt8.self), maximumNestingLevel: 20)
+      })
+    }
+
     let parsed = fileContents.withUnsafeBytes({ buffer in
       // Release builds are fine with the default maximum nesting level of 256.
       // Debug builds overflow with any stack size bigger than 20-ish.
@@ -114,11 +122,13 @@ public class ParserTests: ParserTestCase {
       .deletingLastPathComponent()
       .appendingPathComponent("swift")
       .appendingPathComponent("test")
-    runParserTests(
-      name: "Swift tests",
-      path: testDir,
-      checkDiagnostics: false
-    )
+      for _ in 0..<repetitions {
+          runParserTests(
+            name: "Swift tests",
+            path: testDir,
+            checkDiagnostics: false
+          )
+      }
   }
 
   /// Test all of the files in the "validation-text" directory of the main
