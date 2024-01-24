@@ -18,7 +18,7 @@ import XCTest
 import _SwiftSyntaxTestSupport
 
 public class ParserTests: ParserTestCase {
-  let repetitions = 10 // >1 to benchmark Lexer
+  var repetitions = 100 // >1 to benchmark Lexer
  
   /// Run a single parse test.
   func runParseTest(fileURL: URL, checkDiagnostics: Bool) throws {
@@ -78,7 +78,7 @@ public class ParserTests: ParserTestCase {
           || $0.pathExtension == "swiftinterface"
       }
 
-    print("\(name) - processing \(fileURLs.count) source files")
+    let start = Date.timeIntervalSinceReferenceDate
     DispatchQueue.concurrentPerform(iterations: fileURLs.count) { fileURLIndex in
       let fileURL = fileURLs[fileURLIndex]
       if shouldExclude(fileURL) {
@@ -91,6 +91,8 @@ public class ParserTests: ParserTestCase {
         XCTFail("\(name): \(fileURL) failed due to \(error)")
       }
     }
+    print("\(name) - processed \(fileURLs.count) source files", repetitions,
+          String(format: "%.3f", Date.timeIntervalSinceReferenceDate-start))
   }
 
   let packageDir = URL(fileURLWithPath: #file)
@@ -122,12 +124,13 @@ public class ParserTests: ParserTestCase {
       .deletingLastPathComponent()
       .appendingPathComponent("swift")
       .appendingPathComponent("test")
-      for _ in 0..<repetitions {
+      while repetitions > 0 {
           runParserTests(
             name: "Swift tests",
             path: testDir,
             checkDiagnostics: false
           )
+          repetitions -= 1
       }
   }
 

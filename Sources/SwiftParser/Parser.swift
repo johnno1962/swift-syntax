@@ -16,11 +16,10 @@ extension Parser {
     public static func lex(
       source: UnsafeBufferPointer<UInt8>,
       maximumNestingLevel: Int? = nil) {
-          var parser = Parser(source, maximumNestingLevel: maximumNestingLevel)
-          var c = Lexer.Cursor(input: source, previous: 0)
-          var lexerStateAllocator = BumpPtrAllocator(slabSize: 256*1024)
+          var cursor = Lexer.Cursor(input: source, previous: 0)
+          let lexerStateAllocator = BumpPtrAllocator(slabSize: 256*1024)
           var n = 0
-          while c.nextToken(sourceBufferStart: c, stateAllocator: lexerStateAllocator)
+          while cursor.nextToken(sourceBufferStart: cursor, stateAllocator: lexerStateAllocator)
             .rawTokenKind != .endOfFile {
               n += 1
           }
