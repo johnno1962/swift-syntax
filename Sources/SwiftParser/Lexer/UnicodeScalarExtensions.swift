@@ -252,37 +252,37 @@ extension UInt8 {
 
 extension FixedWidthInteger {
     /// Basic comparison operators
-    @_transparent
+    @inline(__always)
     public static func == (i: Self, s: Unicode.Scalar) -> Bool {
         return i == s.value
     }
-    @_transparent
+    @inline(__always)
     public static func != (i: Self, s: Unicode.Scalar) -> Bool {
         return i != s.value
     }
-    @_transparent
+    @inline(__always)
     public static func <= (i: Self, s: Unicode.Scalar) -> Bool {
         return i <= s.value
     }
-    @_transparent
+    @inline(__always)
     public static func >= (i: Self, s: Unicode.Scalar) -> Bool {
         return i >= s.value
     }
-    @_transparent
+    @inline(__always)
     public static func < (i: Self, s: Unicode.Scalar) -> Bool {
         return i < s.value
     }
-    @_transparent
+    @inline(__always)
     public static func > (i: Self, s: Unicode.Scalar) -> Bool {
         return i > s.value
     }
     /// Used in switch statements
-    @_transparent
+    @inline(__always)
     public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
         return i == s.value
     }
     /// Maybe useful now and then
-    @_transparent
+    @inline(__always)
     public static func - (i: Self, s: Unicode.Scalar) -> Self {
         return i - Self(s.value)
     }
@@ -290,16 +290,16 @@ extension FixedWidthInteger {
 
 extension Optional where Wrapped: FixedWidthInteger {
     /// Basic equality operators
-    @_transparent
+    @inline(__always)
     public static func == (i: Self, s: Unicode.Scalar) -> Bool {
         return i == nil ? false : i! == s.value
     }
-    @_transparent
+    @inline(__always)
     public static func != (i: Self, s: Unicode.Scalar) -> Bool {
         return i == nil ? true : i! != s.value
     }
     /// Used in switch statements
-    @_transparent
+    @inline(__always)
     public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
         return i == nil ? false : i! == s.value
     }
