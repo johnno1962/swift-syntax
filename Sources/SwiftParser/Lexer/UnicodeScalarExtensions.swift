@@ -274,7 +274,7 @@ extension UInt8 {
 /// This extension is enough to compile the new Cusor.swift (faster)
 extension UInt8: ExpressibleByUnicodeScalarLiteral {
     /// Make UInt8 expressible by "c" (probably not worth it)
-    @_transparent
+    @inline(__always)
     public init(unicodeScalarLiteral value: UnicodeScalar) {
         self.init(value.value)
     }
@@ -290,37 +290,37 @@ extension UInt8: ExpressibleByUnicodeScalarLiteral {
  */
 extension FixedWidthInteger {
     /// Basic comparison operators
-    @_transparent
+    @inline(__always)
     public static func == (i: Self, s: Unicode.Scalar) -> Bool {
         return i == s.value
     }
-    @_transparent
+    @inline(__always)
     public static func != (i: Self, s: Unicode.Scalar) -> Bool {
         return i != s.value
     }
-    @_transparent
+    @inline(__always)
     public static func <= (i: Self, s: Unicode.Scalar) -> Bool {
         return i <= s.value
     }
-    @_transparent
+    @inline(__always)
     public static func >= (i: Self, s: Unicode.Scalar) -> Bool {
         return i >= s.value
     }
-    @_transparent
+    @inline(__always)
     public static func < (i: Self, s: Unicode.Scalar) -> Bool {
         return i < s.value
     }
-    @_transparent
+    @inline(__always)
     public static func > (i: Self, s: Unicode.Scalar) -> Bool {
         return i > s.value
     }
     /// Used in switch statements
-    @_transparent
+    @inline(__always)
     public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
         return i == s.value
     }
     /// Maybe useful now and then
-    @_transparent
+    @inline(__always)
     public static func - (i: Self, s: Unicode.Scalar) -> Self {
         return i - Self(s.value)
     }
@@ -328,16 +328,16 @@ extension FixedWidthInteger {
 
 extension Optional where Wrapped: FixedWidthInteger {
     /// Basic equality operators
-    @_transparent
+    @inline(__always)
     public static func == (i: Self, s: Unicode.Scalar) -> Bool {
         return i == nil ? false : i! == s.value
     }
-    @_transparent
+    @inline(__always)
     public static func != (i: Self, s: Unicode.Scalar) -> Bool {
         return i == nil ? true : i! != s.value
     }
     /// Used in switch statements
-    @_transparent
+    @inline(__always)
     public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
         return i == nil ? false : i! == s.value
     }
