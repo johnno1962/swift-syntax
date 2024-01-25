@@ -250,6 +250,7 @@ extension UInt8 {
   }
 }
 
+/// Extensions allowing comparisons between inetegers and double quoted literals.
 extension FixedWidthInteger {
     /// Basic comparison operators
     @inline(__always)
