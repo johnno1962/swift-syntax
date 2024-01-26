@@ -250,58 +250,10 @@ extension UInt8 {
   }
 }
 
-/// Extensions allowing comparisons between inetegers and double quoted literals.
-extension FixedWidthInteger {
-    /// Basic comparison operators
+// Allows comparisons between UInt8 and double quoted literals.
+extension UInt8: ExpressibleByUnicodeScalarLiteral {
     @inline(__always)
-    public static func == (i: Self, s: Unicode.Scalar) -> Bool {
-        return i == s.value
-    }
-    @inline(__always)
-    public static func != (i: Self, s: Unicode.Scalar) -> Bool {
-        return i != s.value
-    }
-    @inline(__always)
-    public static func <= (i: Self, s: Unicode.Scalar) -> Bool {
-        return i <= s.value
-    }
-    @inline(__always)
-    public static func >= (i: Self, s: Unicode.Scalar) -> Bool {
-        return i >= s.value
-    }
-    @inline(__always)
-    public static func < (i: Self, s: Unicode.Scalar) -> Bool {
-        return i < s.value
-    }
-    @inline(__always)
-    public static func > (i: Self, s: Unicode.Scalar) -> Bool {
-        return i > s.value
-    }
-    /// Used in switch statements
-    @inline(__always)
-    public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
-        return i == s.value
-    }
-    /// Maybe useful now and then
-    @inline(__always)
-    public static func - (i: Self, s: Unicode.Scalar) -> Self {
-        return i - Self(s.value)
-    }
-}
-
-extension Optional where Wrapped: FixedWidthInteger {
-    /// Basic equality operators
-    @inline(__always)
-    public static func == (i: Self, s: Unicode.Scalar) -> Bool {
-        return i == nil ? false : i! == s.value
-    }
-    @inline(__always)
-    public static func != (i: Self, s: Unicode.Scalar) -> Bool {
-        return i == nil ? true : i! != s.value
-    }
-    /// Used in switch statements
-    @inline(__always)
-    public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
-        return i == nil ? false : i! == s.value
+    public init(unicodeScalarLiteral value: UnicodeScalar) {
+        self = UInt8(ascii: value)
     }
 }
