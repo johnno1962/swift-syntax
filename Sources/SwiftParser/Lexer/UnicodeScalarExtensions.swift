@@ -263,7 +263,7 @@ extension UInt8 {
  utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py
  6602.21s user 1250.95s system 520% cpu 25:09.33 total
  */
-#if false
+#if true
 /*
  Testing Time: 1076.23s
  utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py
@@ -271,12 +271,11 @@ extension UInt8 {
  utils/run-test --lit ../llvm-project/llvm/utils/lit/lit.py
  6600.06s user 1246.00s system 522% cpu 25:01.41 total
  */
-/// This extension is enough to compile the new Cusor.swift (faster)
+// Allows comparisons between UInt8 and double quoted literals.
 extension UInt8: ExpressibleByUnicodeScalarLiteral {
-    /// Make UInt8 expressible by "c" (probably not worth it)
     @inline(__always)
     public init(unicodeScalarLiteral value: UnicodeScalar) {
-        self.init(value.value)
+        self = UInt8(ascii: value)
     }
 }
 #else
