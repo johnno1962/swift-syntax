@@ -249,7 +249,7 @@ extension UInt8 {
 
 /// Allows direct comparisons between UInt8 and double quoted literals.
 extension UInt8 {
-    /// Basic comparison operators
+    /// Basic equality operators
     @inline(__always)
     public static func == (i: Self, s: Unicode.Scalar) -> Bool {
         return i == UInt8(ascii: s)
@@ -269,15 +269,15 @@ extension UInt8? {
     /// Basic equality operators
     @inline(__always)
     public static func == (i: Self, s: Unicode.Scalar) -> Bool {
-        return i == nil ? false : i! == UInt8(ascii: s)
+        return i == UInt8(ascii: s)
     }
     @inline(__always)
     public static func != (i: Self, s: Unicode.Scalar) -> Bool {
-        return i == nil ? true : i! != UInt8(ascii: s)
+        return i != UInt8(ascii: s)
     }
     /// Used in switch statements
     @inline(__always)
     public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
-        return i == nil ? false : i! == UInt8(ascii: s)
+        return i == UInt8(ascii: s)
     }
 }
