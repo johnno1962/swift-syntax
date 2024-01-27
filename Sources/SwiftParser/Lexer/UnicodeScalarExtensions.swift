@@ -96,12 +96,9 @@ extension Unicode.Scalar {
   var isOperatorStartCodePoint: Bool {
     // ASCII operator chars.
     if self.value < 0x80 {
-      switch UInt8(self.value) {
-      case "/", "=", "-",
-        "+", "*", "%",
-        "<", ">", "!",
-        "&", "|", "^",
-        "~", ".", "?":
+      switch self {
+      case "/", "=", "-", "+", "*", "%", "<",
+        ">", "!", "&", "|", "^", "~", ".", "?":
         return true
       default:
         return false
@@ -261,31 +258,10 @@ extension UInt8 {
     public static func != (i: Self, s: Unicode.Scalar) -> Bool {
         return i != UInt8(ascii: s)
     }
-    @inline(__always)
-    public static func <= (i: Self, s: Unicode.Scalar) -> Bool {
-        return i <= UInt8(ascii: s)
-    }
-    @inline(__always)
-    public static func >= (i: Self, s: Unicode.Scalar) -> Bool {
-        return i >= UInt8(ascii: s)
-    }
-    @inline(__always)
-    public static func < (i: Self, s: Unicode.Scalar) -> Bool {
-        return i < UInt8(ascii: s)
-    }
-    @inline(__always)
-    public static func > (i: Self, s: Unicode.Scalar) -> Bool {
-        return i > UInt8(ascii: s)
-    }
     /// Used in switch statements
     @inline(__always)
     public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
         return i == UInt8(ascii: s)
-    }
-    /// Maybe useful now and then
-    @inline(__always)
-    public static func - (i: Self, s: Unicode.Scalar) -> Self {
-        return i - Self(UInt8(ascii: s))
     }
 }
 

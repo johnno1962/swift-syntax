@@ -942,34 +942,18 @@ extension Lexer.Cursor {
         preferRegexOverBinaryOperator: preferRegexOverBinaryOperator
       )
 
-    case "A", "B", "C",
-      "D", "E", "F",
-      "G", "H", "I",
-      "J", "K", "L",
-      "M", "N", "O",
-      "P", "Q", "R",
-      "S", "T", "U",
-      "V", "W", "X",
-      "Y", "Z",
-      "a", "b", "c",
-      "d", "e", "f",
-      "g", "h", "i",
-      "j", "k", "l",
-      "m", "n", "o",
-      "p", "q", "r",
-      "s", "t", "u",
-      "v", "w", "x",
-      "y", "z",
-      "_":
+    case "A", "B", "C", "D", "E", "F", "G", "H", "I",
+      "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+      "S", "T", "U", "V", "W", "X", "Y", "Z",
+      "a", "b", "c", "d", "e", "f", "g", "h", "i",
+      "j", "k", "l", "m", "n", "o", "p", "q", "r",
+      "s", "t", "u", "v", "w", "x", "y", "z", "_":
       return self.lexIdentifier()
 
     case "$":
       return self.lexDollarIdentifier()
 
-    case "0", "1", "2",
-      "3", "4", "5",
-      "6", "7", "8",
-      "9":
+    case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
       return self.lexNumber()
     case #"'"#, #"""#:
       return self.lexStringQuote(isOpening: true, leadingDelimiterLength: 0)
@@ -1184,47 +1168,25 @@ extension Lexer.Cursor {
       // Start character of tokens.
       //        case (char)-1: case (char)-2:
       case  // Punctuation.
-      "{", "[", "(",
-        "}", "]", ")",
-        "@", ",", ";",
-        ":", "\\", "$",
-        "#",
+        "{", "[", "(", "}", "]", ")", "@",
+        ",", ";", ":", "\\", "$", "#",
 
         // Start of integer/hex/float literals.
-        "0", "1", "2",
-        "3", "4", "5",
-        "6", "7", "8",
-        "9",
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
 
         // Start of literals.
         #"""#, #"'"#, "`",
 
         // Start of identifiers.
-        "A", "B", "C",
-        "D", "E", "F",
-        "G", "H", "I",
-        "J", "K", "L",
-        "M", "N", "O",
-        "P", "Q", "R",
-        "S", "T", "U",
-        "V", "W", "X",
-        "Y", "Z",
-        "a", "b", "c",
-        "d", "e", "f",
-        "g", "h", "i",
-        "j", "k", "l",
-        "m", "n", "o",
-        "p", "q", "r",
-        "s", "t", "u",
-        "v", "w", "x",
-        "y", "z",
-        "_",
+        "A", "B", "C", "D", "E", "F", "G", "H", "I",
+        "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+        "S", "T", "U", "V", "W", "X", "Y", "Z",
+        "a", "b", "c", "d", "e", "f", "g", "h", "i",
+        "j", "k", "l", "m", "n", "o", "p", "q", "r",
+        "s", "t", "u", "v", "w", "x", "y", "z", "_",
 
         // Start of operators.
-        "%", "!", "?",
-        "=", "-", "+",
-        "*", "&", "|",
-        "^", "~", ".":
+        "%", "!", "?", "=", "-", "+", "*", "&", "|", "^", "~", ".":
         break
       case 0xEF:
         if self.is(at: 0xBB), self.is(offset: 1, at: 0xBF) {
@@ -1287,7 +1249,7 @@ extension Lexer.Cursor {
       let zeroConsumed = self.advance(matching: "0")  // Consume '0'
       let oConsumed = self.advance(matching: "o")  // Consume 'o'
       precondition(zeroConsumed && oConsumed)
-      if let peeked = self.peek(), peeked < "0" || peeked > "7" {
+      if let peeked = self.peek(), peeked < UInt8(ascii: "0") || peeked > UInt8(ascii: "7") {
         let errorPos = self
         self.advance(while: { $0.isValidIdentifierContinuationCodePoint })
         return Lexer.Result(
