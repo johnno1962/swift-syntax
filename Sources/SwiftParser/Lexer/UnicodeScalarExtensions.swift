@@ -251,16 +251,16 @@ extension UInt8 {
 extension UInt8 {
     /// Basic equality operators
     @inline(__always)
-    public static func == (i: Self, s: Unicode.Scalar) -> Bool {
+    static func == (i: Self, s: Unicode.Scalar) -> Bool {
         return i == UInt8(ascii: s)
     }
     @inline(__always)
-    public static func != (i: Self, s: Unicode.Scalar) -> Bool {
+    static func != (i: Self, s: Unicode.Scalar) -> Bool {
         return i != UInt8(ascii: s)
     }
     /// Used in switch statements
     @inline(__always)
-    public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
+    static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
         return i == UInt8(ascii: s)
     }
 }
@@ -268,16 +268,16 @@ extension UInt8 {
 extension UInt8? {
     /// Basic equality operators
     @inline(__always)
-    public static func == (i: Self, s: Unicode.Scalar) -> Bool {
+    static func == (i: Self, s: Unicode.Scalar) -> Bool {
         return i == UInt8(ascii: s)
     }
     @inline(__always)
-    public static func != (i: Self, s: Unicode.Scalar) -> Bool {
+    static func != (i: Self, s: Unicode.Scalar) -> Bool {
         return i != UInt8(ascii: s)
     }
     /// Used in switch statements
     @inline(__always)
-    public static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
+    static func ~= (s: Unicode.Scalar, i: Self) -> Bool {
         return i == UInt8(ascii: s)
     }
 }
