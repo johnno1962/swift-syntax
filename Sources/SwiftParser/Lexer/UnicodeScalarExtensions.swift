@@ -96,7 +96,7 @@ extension Unicode.Scalar {
   var isOperatorStartCodePoint: Bool {
     // ASCII operator chars.
     if self.value < 0x80 {
-      switch self {
+      switch UInt8(self.value) {
       case "/", "=", "-", "+", "*", "%", "<",
         ">", "!", "&", "|", "^", "~", ".", "?":
         return true

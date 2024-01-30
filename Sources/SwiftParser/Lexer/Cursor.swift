@@ -1677,7 +1677,7 @@ extension Lexer.Cursor {
       return self.lexUnicodeEscape()
     case "\n", "\r":
       if isMultilineString && self.maybeConsumeNewlineEscape() {
-        return .success(UInt32(("\n")))
+        return .success(UInt32(UInt8(ascii: "\n")))
       }
       return .error(.invalidEscapeSequenceInStringLiteral)
     case nil:
