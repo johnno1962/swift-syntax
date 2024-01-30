@@ -249,11 +249,12 @@ extension UInt8 {
 
 /// Allows direct comparisons between UInt8 and double quoted literals.
 extension UInt8 {
-    /// Basic equality operators
+    /// Equality operator
     @_transparent
     static func == (i: Self, s: Unicode.Scalar) -> Bool {
         return i == UInt8(ascii: s)
     }
+    /// Inequality operator
     @_transparent
     static func != (i: Self, s: Unicode.Scalar) -> Bool {
         return i != UInt8(ascii: s)
@@ -266,11 +267,12 @@ extension UInt8 {
 }
 
 extension UInt8? {
-    /// Basic equality operators
+    /// Equality operator
     @_transparent
     static func == (i: Self, s: Unicode.Scalar) -> Bool {
         return i == UInt8(ascii: s)
     }
+    /// Inequality operator
     @_transparent
     static func != (i: Self, s: Unicode.Scalar) -> Bool {
         return i != UInt8(ascii: s)
