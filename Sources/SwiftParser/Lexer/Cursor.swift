@@ -845,10 +845,7 @@ extension Lexer.Cursor {
   }
 
   func isRightBound(isLeftBound: Bool) -> Bool {
-    guard let c = self.peek() else {
-      return false  // last char in file
-    }
-    switch c {
+    switch self.peek() {
     case " ", "\r", "\n", "\t",  // whitespace
       ")", "]", "}",  // closing delimiters
       ",", ";", ":":  // expression separators
@@ -878,6 +875,8 @@ extension Lexer.Cursor {
       } else {
         return true
       }
+    case nil:
+      return false  // last char in file
     default:
       return true
     }
@@ -891,10 +890,7 @@ extension Lexer.Cursor {
     sourceBufferStart: Lexer.Cursor,
     preferRegexOverBinaryOperator: Bool
   ) -> Lexer.Result {
-    guard let c = self.peek() else {
-      return Lexer.Result(.endOfFile)
-    }
-    switch c {
+    switch self.peek() {
     case "@": _ = self.advance(); return Lexer.Result(.atSign)
     case "{": _ = self.advance(); return Lexer.Result(.leftBrace)
     case "[": _ = self.advance(); return Lexer.Result(.leftSquare)
@@ -964,6 +960,8 @@ extension Lexer.Cursor {
 
     case "`":
       return self.lexEscapedIdentifier()
+    case nil:
+      return Lexer.Result(.endOfFile)
     default:
       var tmp = self
       if tmp.advance(if: { Unicode.Scalar($0).isValidIdentifierStartCodePoint }) {
