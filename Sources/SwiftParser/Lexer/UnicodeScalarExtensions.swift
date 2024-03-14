@@ -97,8 +97,8 @@ extension Unicode.Scalar {
     // ASCII operator chars.
     if self.value < 0x80 {
       switch UInt8(self.value) {
-      case "/", "=", "-", "+", "*", "%", "<",
-        ">", "!", "&", "|", "^", "~", ".", "?":
+      case '/', '=', '-', '+', '*', '%', '<',
+        '>', '!', '&', '|', '^', '~', '.', '?':
         return true
       default:
         return false
@@ -247,6 +247,7 @@ extension UInt8 {
   }
 }
 
+#if false
 /// Allows direct comparisons between UInt8 and double quoted literals.
 extension UInt8 {
   /// Equality operator
@@ -283,3 +284,4 @@ extension UInt8? {
     return i == UInt8(ascii: s)
   }
 }
+#endif
