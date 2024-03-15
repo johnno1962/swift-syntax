@@ -84,6 +84,9 @@ let package = Package(
     .library(name: "SwiftSyntaxMacroExpansion", targets: ["SwiftSyntaxMacroExpansion"]),
     .library(name: "SwiftSyntaxMacrosTestSupport", targets: ["SwiftSyntaxMacrosTestSupport"]),
   ],
+  dependencies: [
+    .package(url: "https://github.com/johnno1962/ASCII", from: "1.0.2")
+  ],
   targets: [
     // MARK: - Internal helper targets
 
@@ -255,7 +258,7 @@ let package = Package(
 
     .target(
       name: "SwiftParser",
-      dependencies: ["SwiftSyntax"],
+      dependencies: ["SwiftSyntax", "ASCII"],
       exclude: ["CMakeLists.txt", "README.md"],
       swiftSettings: swiftParserSwiftSettings
 
