@@ -10,6 +10,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+import ImplicitASCII
+
 @_spi(RawSyntax) @_spi(BumpPtrAllocator) import SwiftSyntax
 
 extension SyntaxText {
