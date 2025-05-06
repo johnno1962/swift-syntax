@@ -3,33 +3,33 @@
 import CompilerPluginSupport
 import PackageDescription
 
-let tag = "601.0.1" // swift-syntax version
+let tag = "601.0.0" // swift-syntax version
 let modules: [(name: String, checksum: String, depends: [String])] = [
-  ("SwiftBasicFormat", "9e6f37657824631983812b22dd6e9a55039d50ed058d11fe703213e94adac78c", ["SwiftSyntax509"]),
-  ("SwiftCompilerPlugin", "41b2a7b772691120c1c15180dc325954475797669738be5a42f2d0cd399a11e7", ["SwiftCompilerPluginMessageHandling", "SwiftSyntaxMacroExpansion", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftBasicFormat", "SwiftOperators", "SwiftParser", "SwiftDiagnostics", "SwiftSyntax", "SwiftSyntax509", "SwiftSyntax510", "SwiftSyntax600", "SwiftSyntax601", "_SwiftSyntaxCShims"]),
-  ("SwiftCompilerPluginMessageHandling", "c6a3bbbc7ff233317a946e36af233f3d6b4d3a76080c59f83079c90738545a1f", ["SwiftSyntaxMacroExpansion", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftBasicFormat", "SwiftOperators", "SwiftParser", "SwiftDiagnostics", "SwiftSyntax", "SwiftSyntax509"]),
-  ("_SwiftCompilerPluginMessageHandling", "15f7374c09c2b11bbb261a7472efb8c36c532c03275786243fbfa456d2dc77f5", ["SwiftSyntaxMacroExpansion", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftBasicFormat", "SwiftOperators", "SwiftParser", "SwiftDiagnostics", "SwiftSyntax", "SwiftSyntax509"]),
-  ("SwiftDiagnostics", "f31ec6da35e9a0f2255c5e7ee491b579b8fc67924af73631c5b57882097fe3fb", ["SwiftSyntax509"]),
-  ("SwiftIDEUtils", "1a5e3c6c5d7306b6fd5f7a5ec5d8074b38315328d818ce52d84c1a04bf24d0fc", ["SwiftSyntax509"]),
-  ("SwiftIfConfig", "9f2fea92e14b96f55352b754bbd7c1b277eb031eff6a91f58e0a2de3df0d7711", ["SwiftSyntax509"]),
-  ("SwiftLexicalLookup", "26547de250aa632dc46566a4bd276e9cb3e3aa937c103e94e61b8a0bb057c2f0", ["SwiftSyntax509"]),
-  ("SwiftOperators", "9d1a2ae8d02fc77790455a8c76b91d8638b684254eb87e258861ab2510e5cfd8", ["SwiftParser", "SwiftDiagnostics", "SwiftSyntax", "SwiftSyntax509"]),
-  ("SwiftParser", "c665b100eff5b90a0284921e9406b84600cfb0d3e0580738025ccb40792bed7d", ["SwiftSyntax", "SwiftSyntax509"]),
-  ("SwiftParserDiagnostics", "4c08b027a476618534346790e6435dee32ca2e301c80a6c6efd04de8625e88cd", ["SwiftParser", "SwiftDiagnostics", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
-  ("SwiftRefactor", "56abccafa57b973b78a86cac4a06139e679acd5506a879ba3ffae5eb70aea731", ["SwiftSyntax509"]),
-  ("SwiftSyntax", "e789db7cd60b53655bcf325cf1aad6a7f114f6d613ee3eefc742c086de9c5a9c", ["SwiftSyntax509"]),
-  ("SwiftSyntax509", "51a2fe16625b67d17e475ce10d3c6e44dc56d456c88a8c51b04426d9fd4eb0c0", []),
-  ("SwiftSyntax510", "f73aeded8afe4377f57b5fc8b2745681445042da94af28d8d28b910df3d39dbd", []),
-  ("SwiftSyntax600", "39c5d957a78b3d6b9b889ca6f8866c68cbaa15318a2a463b10f5446254b2e34b", []),
-  ("SwiftSyntax601", "c199af3604abb570a732745b339f91b1ef22936f211a3298efda576e3d308f0e", []),
-  ("SwiftSyntaxBuilder", "57184bcf175a3bd0c410cd3865f34f7e9d7c927cf8b5a2d618f3c6c6e5af4a75", ["SwiftParserDiagnostics", "SwiftDiagnostics", "SwiftParser", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
-  ("SwiftSyntaxMacroExpansion", "1208e034b14bc187b8450b2ec9f6fcdbc3d83b7c94b82f42af4985bba2e9c4f5", ["SwiftOperators", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftDiagnostics", "SwiftParser", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
-  ("SwiftSyntaxMacros", "3cbd5e6e10ad4d991681ec3e99f780c5b45e178f5fffb4fb9da1c685e1e05dad", ["SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftSyntax", "SwiftSyntax509"]),
-  ("SwiftSyntaxMacrosTestSupport", "9385d02dfaefd9e86a674b29726a1a130c2fd58b02c6e56a54726f36cc118fe5", ["_SwiftSyntaxTestSupport", "SwiftSyntaxMacroExpansion", "SwiftOperators", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftDiagnostics", "SwiftParser", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
-  ("SwiftSyntaxMacrosGenericTestSupport", "30a04fb409a7f7b7305559766ca75e40f6ceb307412e4ddb97e6b5da8c7ab43f", ["SwiftDiagnostics", "SwiftIDEUtils", "SwiftParser", "SwiftSyntaxMacros", "SwiftSyntaxMacroExpansion"]),
-  ("_SwiftSyntaxCShims", "e5b612bd0143ea49a5bf8d1789839e8298b2046bd0c76cee70239ce09013c518", []),
-  ("_SwiftSyntaxTestSupport", "a1b1b928088137f42e9608d08a602c0c59b47bf1061e12a2c02acb0c81c36653", ["SwiftSyntaxMacroExpansion", "SwiftOperators", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftDiagnostics", "SwiftParser", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
-  ("_SwiftLibraryPluginProvider", "32a21d15da8352b62fb3f6326f2e29681a0f0a879d82167cddc93df24d325dd1", []),
+  ("SwiftBasicFormat", "397123fd6ff56b5f33e255cb89379c722bfc912357d9d6bc6a1a6ce0086b2cad", ["SwiftSyntax509"]),
+  ("SwiftCompilerPlugin", "fa3f3925ba587b6921c15fd222260d44ead44b80a076258fac6746648a0df478", ["SwiftCompilerPluginMessageHandling", "SwiftSyntaxMacroExpansion", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftBasicFormat", "SwiftOperators", "SwiftParser", "SwiftDiagnostics", "SwiftSyntax", "SwiftSyntax509", "SwiftSyntax510", "SwiftSyntax600", "SwiftSyntax601", "_SwiftSyntaxCShims"]),
+  ("SwiftCompilerPluginMessageHandling", "dd73591871e075005c3bb04f81fa481034b329292ce95b27e264680e228b80eb", ["SwiftSyntaxMacroExpansion", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftBasicFormat", "SwiftOperators", "SwiftParser", "SwiftDiagnostics", "SwiftSyntax", "SwiftSyntax509"]),
+  ("_SwiftCompilerPluginMessageHandling", "9998e9b523051fe7018808fd1a07b1e006cf5b3db0ddbe459717e3f1bf592e7b", ["SwiftSyntaxMacroExpansion", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftBasicFormat", "SwiftOperators", "SwiftParser", "SwiftDiagnostics", "SwiftSyntax", "SwiftSyntax509"]),
+  ("SwiftDiagnostics", "231051fd521993216604833be18fd23cf2d990d4c38b5ebc1650f8edd9bfbd0b", ["SwiftSyntax509"]),
+  ("SwiftIDEUtils", "c2d52b670c8f6dbd5ccdc04e09f01c8600e226fd438c2d78ec4133f1919624d3", ["SwiftSyntax509"]),
+  ("SwiftIfConfig", "f0be13afe6c2c3abb7e9e1ac9e5d75cc30bac5338614f57c81756c18c8d84540", ["SwiftSyntax509"]),
+  ("SwiftLexicalLookup", "93e142f5b1c54085f56ec5fad98f71d6a9c83f3454deaca3fdb0fe5cdc808614", ["SwiftSyntax509"]),
+  ("SwiftOperators", "a2fd530a358d41a900710e68d2b4a28632068bd863de4adacd13caf7738df907", ["SwiftParser", "SwiftDiagnostics", "SwiftSyntax", "SwiftSyntax509"]),
+  ("SwiftParser", "2d175765136326cd9da730e1a7717f3b82cf6bfc31047e742a29a24e0cf7294a", ["SwiftSyntax", "SwiftSyntax509"]),
+  ("SwiftParserDiagnostics", "0e14ade6280164ce0342e5fc5f6e4dd4b1ae53d570408a11e6842161e44bf698", ["SwiftParser", "SwiftDiagnostics", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
+  ("SwiftRefactor", "c6df5e4096992101edd0f17a2650ccf4fe3f44600bd00092a02cde08162d5c27", ["SwiftSyntax509"]),
+  ("SwiftSyntax", "18754d46965cc3fc273d95c156ba655c1d4d38605a3c5522f8afa45e06ea4a91", ["SwiftSyntax509"]),
+  ("SwiftSyntax509", "37840bfac79a4f39e62de274b05fd1c383d28fb8441b51df5b92f339aaa848b9", []),
+  ("SwiftSyntax510", "e88114ec2327338ab7426d47cf90f15057091eb136a91121afb70b434299f84d", []),
+  ("SwiftSyntax600", "7692655c1db68a116ba808440178c60c9fcf3513dcb0eb27d181849e3f86ac26", []),
+  ("SwiftSyntax601", "2e30bf5473410bd58d56f69c81d39f8e9ea7b7ba1a6898c71bb27efb8a0e7695", []),
+  ("SwiftSyntaxBuilder", "b2dc63086291044b516b9ced2fadaa610647274580602187419a36824c5d8681", ["SwiftParserDiagnostics", "SwiftDiagnostics", "SwiftParser", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
+  ("SwiftSyntaxMacroExpansion", "3566eae4887b5f00f87d06867d203167befd727627928e8d359bd8d849e8b794", ["SwiftOperators", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftDiagnostics", "SwiftParser", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
+  ("SwiftSyntaxMacros", "a3c408fbf47cf7c923a3470cd85bec4938af6449727dc7467b601b2080bbd921", ["SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftSyntax", "SwiftSyntax509"]),
+  ("SwiftSyntaxMacrosTestSupport", "a31d89259e00347d63351b44e4d8510c6258a201963c77e9017d13ed88fa8a0c", ["_SwiftSyntaxTestSupport", "SwiftSyntaxMacroExpansion", "SwiftOperators", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftDiagnostics", "SwiftParser", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
+  ("SwiftSyntaxMacrosGenericTestSupport", "d1c3db7a160b0e10603e507f174fa91e7fd1664b7d6cb4e0314e8af29d6bee7f", ["SwiftDiagnostics", "SwiftIDEUtils", "SwiftParser", "SwiftSyntaxMacros", "SwiftSyntaxMacroExpansion"]),
+  ("_SwiftSyntaxCShims", "10e2eb71660818079a4e4738d2f80e1cd3711284a7d92e0a00ffad50c1dc6b14", []),
+  ("_SwiftSyntaxTestSupport", "24bc4df7f0c0a096fb2347717cbfa849e42a7bbd198effa4c90c61c5941270cc", ["SwiftSyntaxMacroExpansion", "SwiftOperators", "SwiftSyntaxMacros", "SwiftSyntaxBuilder", "SwiftParserDiagnostics", "SwiftDiagnostics", "SwiftParser", "SwiftBasicFormat", "SwiftSyntax", "SwiftSyntax509"]),
+  ("_SwiftLibraryPluginProvider", "ddb39b72fbb586c8499846c58c27163979f45fae56915dc1228f32e79a68edfa", []),
 ]
 
 let package = Package(
@@ -50,5 +50,7 @@ let package = Package(
           name: $0.name,
           path: tag + "/" + "\($0.name).xcframework.zip"
       )
-  }
+  },
+  
+  swiftLanguageVersions: [.v5]
 )

@@ -9,7 +9,7 @@
 
 export REPO=${1:-https://github.com/apple/swift-syntax}
 export REPO_NAME=`basename "$REPO"`
-export TAG=${2:-601.0.1}
+export TAG=${2:-601.0.0}
 export DEST="$PWD/$TAG"
 export SOURCE="/tmp/$REPO_NAME"
 export XCODED=`xcode-select -p`
@@ -82,7 +82,7 @@ PACKAGE
 cat <<'INNER' >/tmp/INNER.sh
         PLATFORM=$1
         DDATA="$SOURCE/build.$PLATFORM"
-        time $XCODED/usr/bin/xcodebuild -scheme $MODULE -quiet -configuration $CONFIG -destination "generic/platform=$(echo $PLATFORM | sed -e 's/_/ /g')" -archivePath $SOURCE/archives/$MODULE-$PLATFORM.xcarchive -derivedDataPath $DDATA SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO SWIFT_ACTIVE_COMPILATION_CONDITIONS="$CONDITIONS" || exit 1
+        time $XCODED/usr/bin/xcodebuild -scheme $MODULE -quiet -configuration $CONFIG -destination "generic/platform=$(echo $PLATFORM | sed -e 's/_/ /g')" -archivePath $SOURCE/archives/$MODULE-$PLATFORM.xcarchive -derivedDataPath $DDATA SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES SWIFT_SERIALIZE_DEBUGGING_OPTIONS=NO SWIFT_VERSION=5 SWIFT_ACTIVE_COMPILATION_CONDITIONS="$CONDITIONS" || exit 1
 INNER
 
 for MODULE in $MODULES; do
